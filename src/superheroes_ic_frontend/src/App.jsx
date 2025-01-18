@@ -1,31 +1,31 @@
-import { useState } from 'react';
-import { superheroes_ic_backend } from 'declarations/superheroes_ic_backend';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-function App() {
-  const [greeting, setGreeting] = useState('');
+import Create from './components/create.jsx';
+import Read from './components/read.jsx';
+import Update from './components/update.jsx';
+import Delete from './components/delete.jsx';
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    const name = event.target.elements.name.value;
-    superheroes_ic_backend.greet(name).then((greeting) => {
-      setGreeting(greeting);
-    });
-    return false;
+class App extends React.Component {
+
+  render() {
+    return (
+      <div>
+        <h1>Superheroes</h1>
+        <p>A simple example that demonstrates how to build a <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> application on the <a href="https://dfinity.org">Internet Computer</a> using <a href="https://sdk.dfinity.org/docs/language-guide/motoko.html">Motoko</a> and <a href="https://reactjs.org">React</a>.</p>
+        <hr/>
+        <Create/>
+        <hr/>
+        <Read/>
+        <hr/>
+        <Update/>
+        <hr/>
+        <Delete/>
+      </div>
+    );
   }
-
-  return (
-    <main>
-      <img src="/logo2.svg" alt="DFINITY logo" />
-      <br />
-      <br />
-      <form action="#" onSubmit={handleSubmit}>
-        <label htmlFor="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button type="submit">Click Me!</button>
-      </form>
-      <section id="greeting">{greeting}</section>
-    </main>
-  );
 }
 
 export default App;
+
+ReactDOM.render(<App/>, document.getElementById('app'));
